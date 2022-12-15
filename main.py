@@ -34,20 +34,20 @@ with open(r"train_part_aa.json") as f:
                 else:
                     order_list.append(data['events'][i]['aid'])
 
-            for j in range(len(click_list) - 5):
-                row = [a for a in click_list[j:j + 5]]
+            for j in range(len(click_list) - 3):
+                row = [a for a in click_list[j:j + 3]]
                 X_clicks.append(row)
-                y_clicks.append(click_list[j + 5])
+                y_clicks.append(click_list[j + 3])
 
-            for j in range(len(cart_list) - 5):
-                row = [a for a in cart_list[j:j + 5]]
+            for j in range(len(cart_list) - 2):
+                row = [a for a in cart_list[j:j + 2]]
                 X_carts.append(row)
-                y_carts.append(click_list[j + 5])
+                y_carts.append(cart_list[j + 2])
 
-            for j in range(len(order_list) - 5):
-                row = [a for a in order_list[j:j + 5]]
+            for j in range(len(order_list) - 2):
+                row = [a for a in order_list[j:j + 2]]
                 X_orders.append(row)
-                y_orders.append(click_list[j + 5])
+                y_orders.append(order_list[j + 2])
 
 
         except json.JSONDecodeError:
