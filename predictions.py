@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import numpy as np
+import joblib
 
 cmp = 0
 clicks = []
@@ -28,8 +29,11 @@ max_orders = max(set(clicks), key=orders.count)
 
 submission = pd.DataFrame(columns=['session_type', 'labels'])
 
-session_type = ""
-predicted_items = ""
+clf1 = joblib.load('clicks_model.sav')
+clf2 = joblib.load('carts_model.sav')
+clf3 = joblib.load('orders_model.sav')
+
+
 # Open the JSON file
 with open(r"test.jsonl") as f:
     while True:
@@ -56,7 +60,7 @@ with open(r"test.jsonl") as f:
             X_test = [[a for a in click_list[n - 3:n]]]
             X_test = np.array(X_test)
 
-            pred_item = clf.predict(X_test)[0]
+            pred_item1 = clf1.predict(X_test)[0]
             new_row_1 = {'session_type': str(data['session']) + "_clicks", 'labels': pred_item1}
             submission = submission.append(new_row_1, ignore_index=True)
 
